@@ -1,14 +1,25 @@
 import express from "express"
-import dotenv from "dotenv"
+import dotenv from "dotenv";
+import cors from "cors"
 import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js"
+import notesRoutes from "./routes/notes.js"
 
 
 dotenv.config()
 const app = express();
+app.use(cors())
+
+
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send("Hello World")
 })
+
+app.use("/auth", authRoutes)
+app.use("/notes", notesRoutes);
+
 
 mongoose.connect(process.env.MONGODB_URL)
 .then(() => console.log("Connected to the DB"))

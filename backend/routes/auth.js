@@ -32,7 +32,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user)
-      return res.status(400).json({ error: "Wrong email or password" });
+      return res.status(400).json({ error: "Wrong email" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
@@ -51,3 +51,6 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+
+export default router
