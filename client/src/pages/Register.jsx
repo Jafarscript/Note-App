@@ -65,7 +65,7 @@ const Register = () => {
                 type="text"
                 required
                 name="firstName"
-                placeholder="John"
+                placeholder="Lukman"
                 className="w-full bg-[#1e1e22] border border-[#2e2e36] rounded-xl px-3 py-3 text-sm text-[#f0f0f2] placeholder-[#44444e] outline-none focus:border-[#c8f5a0] transition-colors"
               />
             </div>
@@ -78,7 +78,7 @@ const Register = () => {
                 value={formData.lastName}
                 type="text"
                 required
-                name="lastName"
+                name="David"
                 placeholder="Doe"
                 className="w-full bg-[#1e1e22] border border-[#2e2e36] rounded-xl px-3 py-3 text-sm text-[#f0f0f2] placeholder-[#44444e] outline-none focus:border-[#c8f5a0] transition-colors"
               />
