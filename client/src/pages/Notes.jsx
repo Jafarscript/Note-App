@@ -19,7 +19,7 @@ const Notes = () => {
       })
       .then((response) => setNotes(response.data))
       .catch((error) => console.log(error.message));
-  }, []);
+  }, [API]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
