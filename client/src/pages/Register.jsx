@@ -19,10 +19,13 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const API = import.meta.env.VITE_API_URL
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5050/auth/register", formData)
+      .post(`${API}/auth/register`, formData)
       .then(() => {
         navigate("/");
       })

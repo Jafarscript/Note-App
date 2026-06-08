@@ -15,10 +15,12 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const API = import.meta.env.VITE_API_URL
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5050/auth/login", formData)
+      .post(`${API}/auth/login`, formData)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         navigate("/notes");

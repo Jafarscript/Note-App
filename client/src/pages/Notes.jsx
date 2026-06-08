@@ -9,9 +9,12 @@ const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState({ title: "", content: "" });
 
+  const API = import.meta.env.VITE_API_URL
+
+
   useEffect(() => {
     axios
-      .get("http://localhost:5050/notes", {
+      .get(`${API}/notes`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => setNotes(response.data))
@@ -25,7 +28,7 @@ const Notes = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5050/notes", formData, {
+      .post(`${API}/notes`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
@@ -37,7 +40,7 @@ const Notes = () => {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:5050/notes/${id}`, {
+      .delete(`${API}/notes/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then(() => setNotes(notes.filter((note) => note._id !== id)))
