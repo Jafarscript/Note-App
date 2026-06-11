@@ -5,7 +5,7 @@ scoping. Users can register, log in, and manage their own private
 notes — no one else can see or access them.
 
 ## 🔗 Live Demo
-[job-tracker.vercel.app](https://your-link.vercel.app)
+[note-app-three-rose.vercel.app](https://note-app-three-rose.vercel.app/)
 
 ## 📸 Screenshot
 ![App Screenshot](./screenshot.png)
