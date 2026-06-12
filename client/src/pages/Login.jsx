@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,6 +16,8 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+   const [showPassword, setShowPassword] = useState(false);
 
   const API = import.meta.env.VITE_API_URL
 
@@ -63,19 +67,20 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className="relative">
             <label className="block text-[11px] font-medium text-[#8a8a96] uppercase tracking-widest mb-1.5">
               Password
             </label>
             <input
               onChange={handleChange}
               value={formData.password}
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               name="password"
               placeholder="••••••••"
               className="w-full bg-[#1e1e22] border border-[#2e2e36] rounded-xl px-4 py-3 text-sm text-[#f0f0f2] placeholder-[#44444e] outline-none focus:border-[#c8f5a0] transition-colors"
             />
+            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 text-[#f0f0f2] top-9">{showPassword ? <FaEyeSlash /> : <FaEye />}</button>
           </div>
 
           <button
