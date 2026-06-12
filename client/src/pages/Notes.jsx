@@ -10,6 +10,7 @@ const Notes = () => {
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [formOpen, setFormOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const API = import.meta.env.VITE_API_URL;
 
@@ -28,6 +29,7 @@ const Notes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios
       .post(`${API}/notes`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -36,8 +38,12 @@ const Notes = () => {
         setNotes([...notes, response.data]);
         setFormData({ title: "", content: "" });
         setFormOpen(false);
+        setLoading(false);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        setLoading(false);
+      });
   };
 
   const handleDelete = (id) => {
@@ -86,7 +92,7 @@ const Notes = () => {
       {formOpen && (
         <div className="lg:hidden bg-[#131316] border-b border-[#2a2a2f] px-4 py-5">
           <p className="text-[11px] font-medium text-[#5a5a65] uppercase tracking-widest mb-4">New note</p>
-          <NoteForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
+          <NoteForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} loading={loading} />
         </div>
       )}
 

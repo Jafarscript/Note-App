@@ -18,19 +18,24 @@ const Login = () => {
   };
 
    const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const API = import.meta.env.VITE_API_URL
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios
       .post(`${API}/auth/login`, formData)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         navigate("/notes");
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Failure", error.message);
+        setLoading(false);
       });
   };
 
@@ -85,10 +90,11 @@ const Login = () => {
 
           <button
             type="submit"
+            disabled={loading}
             style={{ fontFamily: "'Syne', sans-serif" }}
             className="w-full bg-[#c8f5a0] hover:bg-[#b5ef88] text-[#0e0e10] font-medium text-sm rounded-xl py-3 mt-1 cursor-pointer transition-colors"
           >
-            Sign in
+            {loading ? "Siging in..." : "Sign in"}
           </button>
         </form>
 

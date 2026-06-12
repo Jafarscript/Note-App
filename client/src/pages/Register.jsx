@@ -18,6 +18,8 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -27,13 +29,16 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios
       .post(`${API}/auth/register`, formData)
       .then(() => {
         navigate("/");
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Failure", error.message);
+        setLoading(false);
       });
   };
 
@@ -136,10 +141,11 @@ const Register = () => {
 
           <button
             type="submit"
+            disabled={loading}
             style={{ fontFamily: "'Syne', sans-serif" }}
             className="w-full bg-[#c8f5a0] hover:bg-[#b5ef88] text-[#0e0e10] font-medium text-sm rounded-xl py-3 mt-1 cursor-pointer transition-colors"
           >
-            Create account
+            {loading ?  "Creating..." : "Create account"}
           </button>
         </form>
 

@@ -1,6 +1,6 @@
 
 
-const NoteForm = ({formData, handleChange, handleSubmit}) => (
+const NoteForm = ({formData, handleChange, handleSubmit, loading}) => (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label className="block text-[11px] font-medium text-[#6b6b75] mb-1.5">Title</label>
@@ -28,10 +28,11 @@ const NoteForm = ({formData, handleChange, handleSubmit}) => (
       </div>
       <button
         type="submit"
+        disabled={loading}
         style={{ fontFamily: "'Syne', sans-serif" }}
         className="w-full bg-[#c8f5a0] hover:bg-[#b5ef88] text-[#0e0e10] font-medium text-sm rounded-lg py-2.5 cursor-pointer transition-colors"
       >
-        + Add note
+        {loading ? "Adding" :"+ Add note"}
       </button>
     </form>
   );
